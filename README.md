@@ -3,7 +3,7 @@ Ini.Net
 
 ## Features available
 
-  * Write string `public void WriteString(string section, string key, string value)`
+  * Write string `public bool WriteString(string section, string key, string value)`
   * Write integer `public bool WriteInteger(string section, string key, int value)`
   * Write boolean `public bool WriteBoolean(string section, string key, bool value)`
   * Read string `public string ReadString(string section, string key)`
