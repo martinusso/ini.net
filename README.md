@@ -1,6 +1,8 @@
 Ini.Net
 =======
 
+A simple .Net library for managing INI files
+
 ## Features available
 
   * Write string `public bool WriteString(string section, string key, string value)`
