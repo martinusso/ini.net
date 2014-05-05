@@ -58,7 +58,6 @@ namespace IniFileTest
             string expectedText = sb.ToString();
 
             Assert.AreEqual(expectedText, gotText);
-
         }
 
         [TestMethod]
@@ -74,7 +73,6 @@ namespace IniFileTest
             string expectedText = sb.ToString();
 
             Assert.AreEqual(expectedText, gotText);
-
         }
 
         [TestMethod]
@@ -87,6 +85,22 @@ namespace IniFileTest
             this.IniFile.WriteString(section, key, value);
             string gotValue = this.IniFile.ReadString(section, key);
             Assert.AreEqual(value, gotValue);
+        }
+
+        [TestMethod]
+        public void TestSectionShouldExists()
+        {
+            IniFile.WriteString("section", "key", "value");
+            bool sectionExists = this.IniFile.SectionExists("section");
+            Assert.IsTrue(sectionExists);
+        }
+
+        [TestMethod]
+        public void TestSectionShouldNotExists()
+        {
+            IniFile.WriteString("section", "key", "value");
+            bool sectionExists = this.IniFile.SectionExists("nonexistent_section");
+            Assert.IsFalse(sectionExists);
         }
     }
 }

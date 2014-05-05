@@ -29,5 +29,14 @@ namespace Ini.Net
             int i = GetPrivateProfileString(section, key, "", temp, 255, this.FileName);
             return temp.ToString();
         }
+
+        // function SectionExists(const Section: string): Boolean;
+        public bool SectionExists(string sectionName)
+        {
+            //string[] raw = GetPrivateProfileString(sectionName, null, null, this.FileName);
+            StringBuilder temp = new StringBuilder(255);
+            int i = GetPrivateProfileString(sectionName, null, null, temp, 255, this.FileName);
+            return temp.Length > 0;
+        }
     }
 }
