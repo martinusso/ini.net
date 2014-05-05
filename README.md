@@ -4,17 +4,23 @@ Ini.Net
 ## Features available
 
   * Write string `public void WriteString(string section, string key, string value)`
+  * Write integer `public bool WriteInteger(string section, string key, int value)`
+  * Write boolean `public bool WriteBoolean(string section, string key, bool value)`
   * Read string `public string ReadString(string section, string key)`
-  * Section exists `public bool SectionExists(string sectionName)`
+  * Read boolean `public bool ReadBoolean(string section, string key)`
+  * Read integer `public int ReadInteger(string section, string key)`
+  * Section exists `public bool SectionExists(string section)`
+  
+  
 
 
 ## Roadmap
     
   - ~~function SectionExists(const Section: string): Boolean;~~
-  - function ReadInteger(const Section, Ident: string; Default: Longint): Longint; 
-  - procedure WriteInteger(const Section, Ident: string; Value: Longint); 
-  - function ReadBool(const Section, Ident: string; Default: Boolean): Boolean; 
-  - procedure WriteBool(const Section, Ident: string; Value: Boolean); 
+  - ~~function ReadInteger(const Section, Ident: string; Default: Longint): Longint;~~
+  - ~~procedure WriteInteger(const Section, Ident: string; Value: Longint);~~
+  - ~~function ReadBool(const Section, Ident: string; Default: Boolean): Boolean;~~
+  - ~~procedure WriteBool(const Section, Ident: string; Value: Boolean);~~
   - function ReadDate(const Section, Name: string; Default: TDateTime): TDateTime; 
   - function ReadDateTime(const Section, Name: string; Default: TDateTime): TDateTime;
   - function ReadFloat(const Section, Name: string; Default: Double): Double; 
