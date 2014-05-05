@@ -1,6 +1,11 @@
 Ini.Net
 =======
 
+## Features available
+
+  * Write string `public void WriteString(string section, string key, string value)`
+  * Read string `public string ReadString(string section, string key)`
+
 
 ## Roadmap
     
