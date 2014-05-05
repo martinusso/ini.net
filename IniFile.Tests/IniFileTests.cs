@@ -5,52 +5,52 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Ini.Net;
 
-namespace IniFileTest
+namespace IniFile.Tests
 {
     [TestClass]
-    public class IniFileTest
+    public class IniFileTests
     {
-        private string FileName;
-        private IniFile IniFile;
+        private string fileName;
+        private Ini.Net.IniFile iniFile;
 
-        public IniFileTest()
+        public IniFileTests()
         {
             string basePath = System.IO.Directory.GetCurrentDirectory();
-            this.FileName = Path.Combine(basePath, "Test.ini"); 
+            this.fileName = Path.Combine(basePath, "Test.ini"); 
         }
 
         [TestInitialize()]
         public void Initialize()
         {
-            this.IniFile = new IniFile(this.FileName);
+            this.iniFile = new Ini.Net.IniFile(this.fileName);
         }
 
         [TestCleanup()]
         public void Cleanup()
         {
-            File.Delete(this.FileName);
+            File.Delete(this.fileName);
         }
         
         [TestMethod]
         public void TestFileNameShouldBeTestini()
         {
-            Assert.AreEqual(FileName, this.IniFile.FileName);
+            Assert.AreEqual(fileName, this.iniFile.FileName);
         }
 
         [TestMethod]
         public void TestIniFileShouldExist()
         {
-            IniFile.WriteString("section", "key", "value");
-            bool fileExists = File.Exists(this.FileName);
+            iniFile.WriteString("section", "key", "value");
+            bool fileExists = File.Exists(this.fileName);
             Assert.IsTrue(fileExists);
         }
 
         [TestMethod]
         public void TestWriteString()
         {
-            IniFile.WriteString("section", "key", "value");
+            iniFile.WriteString("section", "key", "value");
 
-            string gotText = System.IO.File.ReadAllText(this.FileName);
+            string gotText = System.IO.File.ReadAllText(this.fileName);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("[section]");
@@ -63,9 +63,9 @@ namespace IniFileTest
         [TestMethod]
         public void TestWriteInteger()
         {
-            IniFile.WriteInteger("breno", "birthyear", 1984);
+            iniFile.WriteInteger("breno", "birthyear", 1984);
 
-            string gotText = System.IO.File.ReadAllText(this.FileName);
+            string gotText = System.IO.File.ReadAllText(this.fileName);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("[breno]");
@@ -78,9 +78,9 @@ namespace IniFileTest
         [TestMethod]
         public void TestWriteBoolean()
         {
-            IniFile.WriteBoolean("breno", "is_alive", true);
+            iniFile.WriteBoolean("breno", "is_alive", true);
 
-            string gotText = System.IO.File.ReadAllText(this.FileName);
+            string gotText = System.IO.File.ReadAllText(this.fileName);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("[breno]");
@@ -93,9 +93,9 @@ namespace IniFileTest
         [TestMethod]
         public void TestRewriteString()
         {
-            this.IniFile.WriteString("section", "key", "value");
-            this.IniFile.WriteString("section", "key", "value2");
-            string gotText = System.IO.File.ReadAllText(this.FileName);
+            this.iniFile.WriteString("section", "key", "value");
+            this.iniFile.WriteString("section", "key", "value2");
+            string gotText = System.IO.File.ReadAllText(this.fileName);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("[section]");
@@ -112,8 +112,8 @@ namespace IniFileTest
             const string key = "key";
             const string value = "value";
 
-            this.IniFile.WriteString(section, key, value);
-            string gotValue = this.IniFile.ReadString(section, key);
+            this.iniFile.WriteString(section, key, value);
+            string gotValue = this.iniFile.ReadString(section, key);
             Assert.AreEqual(value, gotValue);
         }
 
@@ -124,8 +124,8 @@ namespace IniFileTest
             const string key = "birthyear";
             const int value = 1984;
 
-            this.IniFile.WriteInteger(section, key, value);
-            int gotValue = this.IniFile.ReadInteger(section, key);
+            this.iniFile.WriteInteger(section, key, value);
+            int gotValue = this.iniFile.ReadInteger(section, key);
             Assert.AreEqual(value, gotValue);
         }
 
@@ -136,24 +136,24 @@ namespace IniFileTest
             const string key = "is_dead";
             const bool value = false;
 
-            this.IniFile.WriteBoolean(section, key, value);
-            bool gotValue = this.IniFile.ReadBoolean(section, key);
+            this.iniFile.WriteBoolean(section, key, value);
+            bool gotValue = this.iniFile.ReadBoolean(section, key);
             Assert.AreEqual(value, gotValue);
         }
 
         [TestMethod]
         public void TestSectionShouldExists()
         {
-            IniFile.WriteString("section", "key", "value");
-            bool sectionExists = this.IniFile.SectionExists("section");
+            iniFile.WriteString("section", "key", "value");
+            bool sectionExists = this.iniFile.SectionExists("section");
             Assert.IsTrue(sectionExists);
         }
 
         [TestMethod]
         public void TestSectionShouldNotExists()
         {
-            IniFile.WriteString("section", "key", "value");
-            bool sectionExists = this.IniFile.SectionExists("nonexistent_section");
+            iniFile.WriteString("section", "key", "value");
+            bool sectionExists = this.iniFile.SectionExists("nonexistent_section");
             Assert.IsFalse(sectionExists);
         }
     }
