@@ -61,6 +61,21 @@ namespace IniFileTest
         }
 
         [TestMethod]
+        public void TestWriteInteger()
+        {
+            IniFile.WriteInteger("breno", "birthyear", 1984);
+
+            string gotText = System.IO.File.ReadAllText(this.FileName);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[breno]");
+            sb.AppendLine("birthyear=1984");
+            string expectedText = sb.ToString();
+
+            Assert.AreEqual(expectedText, gotText);
+        }
+
+        [TestMethod]
         public void TestRewriteString()
         {
             this.IniFile.WriteString("section", "key", "value");
@@ -84,6 +99,18 @@ namespace IniFileTest
 
             this.IniFile.WriteString(section, key, value);
             string gotValue = this.IniFile.ReadString(section, key);
+            Assert.AreEqual(value, gotValue);
+        }
+
+        [TestMethod]
+        public void TestReadInteger()
+        {
+            const string section = "martinusso";
+            const string key = "birthyear";
+            const int value = 1984;
+
+            this.IniFile.WriteInteger(section, key, value);
+            int gotValue = this.IniFile.ReadInteger(section, key);
             Assert.AreEqual(value, gotValue);
         }
 

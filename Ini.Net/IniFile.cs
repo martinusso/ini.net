@@ -34,9 +34,21 @@ namespace Ini.Net
             this.FileName = fileName;
         }
 
-        public void WriteString(string section, string key, string value)
+        public bool WriteString(string section, string key, string value)
         {
-            WritePrivateProfileString(section, key, value, this.FileName);
+            long l = WritePrivateProfileString(section, key, value, this.FileName);
+            return l > 0;
+        }
+
+        public bool WriteInteger(string section, string key, int value)
+        {
+            return WriteString(section, key, value.ToString());
+        }
+
+        public int ReadInteger(string section, string key)
+        {
+            string value = ReadString(section, key);
+            return Convert.ToInt32(value.Trim());
         }
 
         public string ReadString(string section, string key)
