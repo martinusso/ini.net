@@ -10,89 +10,71 @@ namespace IniFileTest
     [TestClass]
     public class IniFileTest
     {
-        string filename = "";
+        private string FileName;
+        private IniFile IniFile;
 
         public IniFileTest()
         {
             string basePath = System.IO.Directory.GetCurrentDirectory();
-            this.filename = Path.Combine(basePath, "Test.ini"); 
+            this.FileName = Path.Combine(basePath, "Test.ini"); 
+        }
+
+        [TestInitialize()]
+        public void Initialize()
+        {
+            this.IniFile = new IniFile(this.FileName);
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+            File.Delete(this.FileName);
         }
         
         [TestMethod]
         public void TestFileNameShouldBeTestini()
         {
-            var inifile = new IniFile(this.filename);
-            try
-            {
-                Assert.AreEqual(filename, inifile.GetFileName());
-            }
-            finally
-            {
-                File.Delete(this.filename);
-            }
+            Assert.AreEqual(FileName, this.IniFile.FileName);
         }
 
         [TestMethod]
         public void TestIniFileShouldExist()
         {
-            var inifile = new IniFile(this.filename);
-            try
-            {
-                inifile.WriteString("section", "key", "value");
-                bool fileExists = File.Exists(this.filename);
-                Assert.IsTrue(fileExists);
-            }
-            finally
-            {
-                File.Delete(this.filename);
-            }
+            IniFile.WriteString("section", "key", "value");
+            bool fileExists = File.Exists(this.FileName);
+            Assert.IsTrue(fileExists);
         }
 
         [TestMethod]
         public void TestWriteString()
         {
-            var inifile = new IniFile(this.filename);
-            try
-            {
-                inifile.WriteString("section", "key", "value");
+            IniFile.WriteString("section", "key", "value");
 
-                string gotText = System.IO.File.ReadAllText(this.filename);
+            string gotText = System.IO.File.ReadAllText(this.FileName);
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("[section]");
-                sb.AppendLine("key=value");
-                string expectedText = sb.ToString();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[section]");
+            sb.AppendLine("key=value");
+            string expectedText = sb.ToString();
 
-                Assert.AreEqual(expectedText, gotText);
-            }
-            finally
-            {
-                File.Delete(this.filename);
-            }
+            Assert.AreEqual(expectedText, gotText);
+
         }
 
         [TestMethod]
         public void TestRewriteString()
         {
-            var inifile = new IniFile(this.filename);
-            try
-            {
-                inifile.WriteString("section", "key", "value");
+            this.IniFile.WriteString("section", "key", "value");
+            this.IniFile.WriteString("section", "key", "value2");
+            string gotText = System.IO.File.ReadAllText(this.FileName);
 
-                inifile.WriteString("section", "key", "value2");
-                string gotText = System.IO.File.ReadAllText(this.filename);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[section]");
+            sb.AppendLine("key=value2");
+            string expectedText = sb.ToString();
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("[section]");
-                sb.AppendLine("key=value2");
-                string expectedText = sb.ToString();
+            Assert.AreEqual(expectedText, gotText);
 
-                Assert.AreEqual(expectedText, gotText);
-            }
-            finally
-            {
-                File.Delete(this.filename);
-            }
         }
 
         [TestMethod]
@@ -102,19 +84,9 @@ namespace IniFileTest
             const string key = "key";
             const string value = "value";
 
-            var inifile = new IniFile(this.filename);
-            try
-            {
-                inifile.WriteString(section, key, value);
-
-                string gotValue = inifile.ReadString(section, key);
-
-                Assert.AreEqual(value, gotValue);
-            }
-            finally
-            {
-                File.Delete(this.filename);
-            }
+            this.IniFile.WriteString(section, key, value);
+            string gotValue = this.IniFile.ReadString(section, key);
+            Assert.AreEqual(value, gotValue);
         }
     }
 }

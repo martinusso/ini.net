@@ -11,28 +11,28 @@ namespace Ini.Net
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
-        private string fileName;
-        public string GetFileName()
-        {
-            return this.fileName;
-        }
+        public string FileName { get; private set; }
+        //private string fileName;
+        //public string GetFileName()
+        //{
+        //    return this.fileName;
+        //}
 
         public IniFile(string fileName)
         {
-            this.fileName = fileName;
+            this.FileName = fileName;
         }
 
         public void WriteString(string section, string key, string value)
         {
-            WritePrivateProfileString(section, key, value, this.fileName);
+            WritePrivateProfileString(section, key, value, this.FileName);
         }
 
         public string ReadString(string section, string key)
         {
             StringBuilder temp = new StringBuilder(255);
-            int i = GetPrivateProfileString(section, key, "", temp, 255, this.fileName);
+            int i = GetPrivateProfileString(section, key, "", temp, 255, this.FileName);
             return temp.ToString();
-
         }
     }
 }
