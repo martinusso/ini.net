@@ -51,6 +51,13 @@ namespace Ini.Net
             return WriteString(section, key, str);
         }
 
+        public string ReadString(string section, string key)
+        {
+            StringBuilder temp = new StringBuilder(size);
+            GetPrivateProfileString(section, key, null, temp, size, this.FileName);
+            return temp.ToString();
+        }
+
         public int ReadInteger(string section, string key)
         {
             string value = ReadString(section, key);
@@ -63,16 +70,9 @@ namespace Ini.Net
             return value.ToUpper().Equals("TRUE");
         }
 
-        public string ReadString(string section, string key)
+        public bool SectionExists(string section)
         {
-            StringBuilder temp = new StringBuilder(size);
-            GetPrivateProfileString(section, key, null, temp, size, this.FileName);
-            return temp.ToString();
-        }
-
-        public bool SectionExists(string sectionName)
-        {
-            int i = GetPrivateProfileString(sectionName, null, null, new StringBuilder(size), size, this.FileName);
+            int i = GetPrivateProfileString(section, null, null, new StringBuilder(size), size, this.FileName);
             return i > 0;
         }
     }
