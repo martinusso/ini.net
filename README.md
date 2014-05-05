@@ -5,11 +5,12 @@ Ini.Net
 
   * Write string `public void WriteString(string section, string key, string value)`
   * Read string `public string ReadString(string section, string key)`
+  * Section exists `public bool SectionExists(string sectionName)`
 
 
 ## Roadmap
     
-  - function SectionExists(const Section: string): Boolean;
+  - ~~function SectionExists(const Section: string): Boolean;~~
   - function ReadInteger(const Section, Ident: string; Default: Longint): Longint; 
   - procedure WriteInteger(const Section, Ident: string; Value: Longint); 
   - function ReadBool(const Section, Ident: string; Default: Boolean): Boolean; 
