@@ -45,10 +45,22 @@ namespace Ini.Net
             return WriteString(section, key, value.ToString());
         }
 
+        public bool WriteBoolean(string section, string key, bool value)
+        {
+            string str = value.ToString().ToUpper();
+            return WriteString(section, key, str);
+        }
+
         public int ReadInteger(string section, string key)
         {
             string value = ReadString(section, key);
             return Convert.ToInt32(value.Trim());
+        }
+
+        public bool ReadBoolean(string section, string key)
+        {
+            string value = ReadString(section, key);
+            return value.ToUpper().Equals("TRUE");
         }
 
         public string ReadString(string section, string key)
