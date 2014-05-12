@@ -94,12 +94,12 @@ namespace IniFile.Tests
         public void TestRewriteString()
         {
             this.iniFile.WriteString("section", "key", "value");
-            this.iniFile.WriteString("section", "key", "value2");
+            this.iniFile.WriteString("section", "key", "value 2");
             string gotText = System.IO.File.ReadAllText(this.fileName);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("[section]");
-            sb.AppendLine("key=value2");
+            sb.AppendLine("key=value 2");
             string expectedText = sb.ToString();
 
             Assert.AreEqual(expectedText, gotText);
