@@ -1,4 +1,4 @@
-Ini.NET
+Ini.Net
 =======
 
 A simple .NET library for managing INI files
