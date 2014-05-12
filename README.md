@@ -1,7 +1,7 @@
-Ini.Net
+Ini.NET
 =======
 
-A simple .Net library for managing INI files
+A simple .NET library for managing INI files
 
 ## Features available
 
