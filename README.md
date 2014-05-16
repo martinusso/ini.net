@@ -18,6 +18,7 @@ A simple .NET library for managing INI files
 
 ## Roadmap
     
+  - https://gist.github.com/evandroamparo/094ff8d209e6978dc66a
   - ~~function SectionExists(const Section: string): Boolean;~~
   - ~~function ReadInteger(const Section, Ident: string; Default: Longint): Longint;~~
   - ~~procedure WriteInteger(const Section, Ident: string; Value: Longint);~~
