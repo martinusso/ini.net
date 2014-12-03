@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ini.Net\Ini.Net.csproj">
+    <ProjectReference Include="..\..\src\Ini.Net\Ini.Net.csproj">
       <Project>{109977df-ddcb-4cb8-b658-51df6da2842c}</Project>
       <Name>Ini.Net</Name>
     </ProjectReference>
