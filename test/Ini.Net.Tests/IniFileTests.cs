@@ -15,8 +15,7 @@ namespace Ini.Net.Tests
 
         public IniFileTests()
         {
-            string basePath = System.IO.Directory.GetCurrentDirectory();
-            this.fileName = Path.Combine(basePath, "Test.ini"); 
+            this.fileName = "Test.ini";
         }
 
         [TestInitialize()]
@@ -29,12 +28,6 @@ namespace Ini.Net.Tests
         public void Cleanup()
         {
             File.Delete(this.fileName);
-        }
-        
-        [TestMethod]
-        public void TestFileNameShouldBeTestini()
-        {
-            Assert.AreEqual(fileName, this.iniFile.FileName);
         }
 
         [TestMethod]

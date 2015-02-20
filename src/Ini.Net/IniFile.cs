@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
@@ -43,7 +44,18 @@ namespace Ini.Net
 
         public IniFile(string fileName)
         {
+            this.SetFileName(fileName);
+        }
+
+        private void SetFileName(string fileName)
+        {
             this.FileName = fileName;
+
+            if (!Path.IsPathRooted(this.FileName))
+            {
+                string basePath = System.IO.Directory.GetCurrentDirectory();
+                this.FileName = Path.Combine(basePath, this.FileName);
+            }
         }
 
         public void DeleteKey(string section, string key)
