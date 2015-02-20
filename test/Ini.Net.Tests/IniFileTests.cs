@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Ini.Net;
 
-namespace IniFile.Tests
+namespace Ini.Net.Tests
 {
     [TestClass]
     public class IniFileTests

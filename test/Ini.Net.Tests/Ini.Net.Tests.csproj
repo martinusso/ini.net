@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4D5287AC-085F-4CC0-8D23-91F7B1FF05E8}</ProjectGuid>
+    <ProjectGuid>{B99D6813-2B82-4EB3-B043-BFCDDCBB745B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IniFile.Tests</RootNamespace>
-    <AssemblyName>IniFile.Tests</AssemblyName>
+    <RootNamespace>Ini.Net.Tests</RootNamespace>
+    <AssemblyName>Ini.Net.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
