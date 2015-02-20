@@ -145,6 +145,12 @@ namespace Ini.Net
             return i > 0;
         }
 
+        public bool KeyExists(string section, string key)
+        {
+            int i = GetPrivateProfileString(section, key, null, new StringBuilder(SIZE), SIZE, this.FileName);
+            return i > 0;
+        }
+
         public IDictionary<string, string> ReadSection(string section)
         {
             var buffer = new byte[2048];

@@ -293,6 +293,22 @@ namespace Ini.Net.Tests
         }
 
         [TestMethod]
+        public void TestKeyShouldExists()
+        {
+            iniFile.WriteString("section", "key", "value");
+            bool keyExists = this.iniFile.KeyExists("section", "key");
+            Assert.IsTrue(keyExists);
+        }
+
+        [TestMethod]
+        public void TestKeyShouldNotExists()
+        {
+            iniFile.WriteString("section", "key", "value");
+            bool keyExists = this.iniFile.SectionExists("key_fake");
+            Assert.IsFalse(keyExists);
+        }
+
+        [TestMethod]
         public void TestReadSection()
         {
             const string KEY_1 = "key_1";
