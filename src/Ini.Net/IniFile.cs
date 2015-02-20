@@ -46,6 +46,11 @@ namespace Ini.Net
             this.FileName = fileName;
         }
 
+        public void DeleteKey(string section, string key)
+        {
+            WritePrivateProfileString(section, key, null, this.FileName);
+        }
+
         public string ReadString(string section, string key)
         {
             var temp = new StringBuilder(SIZE);
