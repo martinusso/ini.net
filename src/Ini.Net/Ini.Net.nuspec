@@ -8,7 +8,7 @@
     <owners>martinusso</owners>
     <licenseUrl>https://github.com/martinusso/Ini.Net/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/martinusso/Ini.Net/wiki</projectUrl>
-    <iconUrl>https://github.com/martinusso/Ini.Net/blob/master/docs/files/img/Init.Net-200.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/martinusso/Ini.Net/master/docs/files/img/Init.Net-200.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>ni.Net is a simple .NET library for managing INI files.</description>
     <releaseNotes>First release.</releaseNotes>
