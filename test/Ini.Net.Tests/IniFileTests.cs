@@ -57,6 +57,18 @@ namespace Ini.Net.Tests
         }
 
         [TestMethod]
+        public void TestDeleteSection()
+        {
+            this.iniFile.WriteString("section", "key_1", "value_1");
+            this.iniFile.WriteString("section", "key_2", "value_2");
+            this.iniFile.WriteString("section", "key_3", "value_3");
+            this.iniFile.DeleteSection("section");
+
+            bool sectionExists = this.iniFile.SectionExists("section");
+            Assert.IsFalse(sectionExists);
+        }
+
+        [TestMethod]
         public void TestReadString()
         {
             const string section = "section";
