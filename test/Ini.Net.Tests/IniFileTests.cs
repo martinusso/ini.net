@@ -291,5 +291,27 @@ namespace Ini.Net.Tests
             bool sectionExists = this.iniFile.SectionExists("nonexistent_section");
             Assert.IsFalse(sectionExists);
         }
+
+        [TestMethod]
+        public void TestReadSection()
+        {
+            const string KEY_1 = "key_1";
+            const string VALUE_1 = "value_1=aa";
+            const string KEY_2 = "key_2";
+            const string VALUE_2 = "value_2";
+            const string KEY_3 = "key_3";
+            const string VALUE_3 = "value_3";
+
+            iniFile.WriteString("section", KEY_1, VALUE_1);
+            iniFile.WriteString("section", KEY_2, VALUE_2);
+            iniFile.WriteString("section", KEY_3, VALUE_3);
+            var section = this.iniFile.ReadSection("section");
+
+            Assert.AreEqual(3, section.Count);
+
+            Assert.AreEqual(VALUE_1, section[KEY_1]);
+            Assert.AreEqual(VALUE_2, section[KEY_2]);
+            Assert.AreEqual(VALUE_3, section[KEY_3]);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace Ini.Net
 {
@@ -24,6 +25,15 @@ namespace Ini.Net
         /// </returns>
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+
+        /// <summary>
+        /// Retrieves all the keys and values for the specified section of an initialization file.
+        /// </summary>
+        /// <returns>
+        /// The return value is the number of characters copied to the buffer, not including the terminating null character.
+        /// </returns>
+        [DllImport("kernel32.dll")]
+        private static extern int GetPrivateProfileSection(string lpAppName, byte[] lpszReturnBuffer, int nSize, string lpFileName);
 
         private const int SIZE = 255;
         private const string DATETIME_MASK = "yyyy/MM/dd HH:mm:ss";
@@ -133,6 +143,21 @@ namespace Ini.Net
         {
             int i = GetPrivateProfileString(section, null, null, new StringBuilder(SIZE), SIZE, this.FileName);
             return i > 0;
+        }
+
+        public IDictionary<string, string> ReadSection(string section)
+        {
+            var buffer = new byte[2048];
+            GetPrivateProfileSection(section, buffer, 2048, this.FileName);
+            var tmp = Encoding.ASCII.GetString(buffer).Trim('\0').Split('\0');
+            var result = new Dictionary<string, string>();
+
+            foreach (var entry in tmp)
+            {
+                var s = entry.Split(new string[] { "=" }, 2, StringSplitOptions.None);
+                result.Add(s[0], s[1]);
+            }
+            return result;
         }
     }
 }
