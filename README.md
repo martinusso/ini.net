@@ -13,5 +13,9 @@ Ini.Net is a simple .NET library for managing INI files.
 
 ## Ini.Net wiki
   - [Welcome to the Ini.Net wiki!](https://github.com/martinusso/Ini.Net/wiki)
-    - [Getting Started with IniFile](https://github.com/martinusso/Ini.Net/wiki/Getting-started-with-IniFile)
-    - [Features available](https://github.com/martinusso/Ini.Net/wiki/Features-available)
+
+
+## Contributing
+
+If you got something that's worth including into the project please [submit a Pull Request](https://github.com/martinusso/Ini.Net/pulls) or [open an issue](https://github.com/martinusso/Ini.Net/issues) for further discussion.
+
