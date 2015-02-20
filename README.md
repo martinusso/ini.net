@@ -3,6 +3,7 @@ Ini.Net
 
 Ini.Net is a simple .NET library for managing INI files.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/t9k4tliic0qeh73y?svg=true)](https://ci.appveyor.com/project/martinusso/ini-net)
 [![Nuget count](http://img.shields.io/nuget/v/ini.net.svg)](https://www.nuget.org/packages/codecracker/)
 [![Nuget downloads](http://img.shields.io/nuget/dt/ini.net.svg)](https://www.nuget.org/packages/codecracker/)
 
