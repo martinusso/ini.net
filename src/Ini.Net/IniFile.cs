@@ -49,6 +49,24 @@ namespace Ini.Net
             return value.ToUpper().Equals("TRUE");
         }
 
+        public decimal ReadDecimal(string section, string key)
+        {
+            string value = ReadString(section, key);
+            return decimal.Parse(value.Trim(), System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public double ReadDouble(string section, string key)
+        {
+            string value = ReadString(section, key);
+            return double.Parse(value.Trim(), System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public float ReadFloat(string section, string key)
+        {
+            string value = ReadString(section, key);
+            return float.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+        }
+
         public int ReadInteger(string section, string key)
         {
             string value = ReadString(section, key);
@@ -79,6 +97,21 @@ namespace Ini.Net
         {
             string str = value.ToString().ToUpper();
             return WriteString(section, key, str);
+        }
+
+        public bool WriteDecimal(string section, string key, decimal value)
+        {
+            return WriteString(section, key, value.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+
+        public bool WriteDouble(string section, string key, double value)
+        {
+            return WriteString(section, key, value.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+
+        public bool WriteFloat(string section, string key, float value)
+        {
+            return WriteString(section, key, value.ToString(System.Globalization.CultureInfo.InvariantCulture));
         }
 
         public bool WriteInteger(string section, string key, int value)
