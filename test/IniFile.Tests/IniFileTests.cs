@@ -46,66 +46,6 @@ namespace IniFile.Tests
         }
 
         [TestMethod]
-        public void TestWriteString()
-        {
-            iniFile.WriteString("section", "key", "value");
-
-            string gotText = System.IO.File.ReadAllText(this.fileName);
-
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[section]");
-            sb.AppendLine("key=value");
-            string expectedText = sb.ToString();
-
-            Assert.AreEqual(expectedText, gotText);
-        }
-
-        [TestMethod]
-        public void TestWriteInteger()
-        {
-            iniFile.WriteInteger("breno", "birthyear", 1984);
-
-            string gotText = System.IO.File.ReadAllText(this.fileName);
-
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[breno]");
-            sb.AppendLine("birthyear=1984");
-            string expectedText = sb.ToString();
-
-            Assert.AreEqual(expectedText, gotText);
-        }
-
-        [TestMethod]
-        public void TestWriteBoolean()
-        {
-            iniFile.WriteBoolean("breno", "is_alive", true);
-
-            string gotText = System.IO.File.ReadAllText(this.fileName);
-
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[breno]");
-            sb.AppendLine("is_alive=TRUE");
-            string expectedText = sb.ToString();
-
-            Assert.AreEqual(expectedText, gotText);
-        }
-
-        [TestMethod]
-        public void TestRewriteString()
-        {
-            this.iniFile.WriteString("section", "key", "value");
-            this.iniFile.WriteString("section", "key", "value 2");
-            string gotText = System.IO.File.ReadAllText(this.fileName);
-
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[section]");
-            sb.AppendLine("key=value 2");
-            string expectedText = sb.ToString();
-
-            Assert.AreEqual(expectedText, gotText);
-        }
-
-        [TestMethod]
         public void TestReadString()
         {
             const string section = "section";
@@ -139,6 +79,120 @@ namespace IniFile.Tests
             this.iniFile.WriteBoolean(section, key, value);
             bool gotValue = this.iniFile.ReadBoolean(section, key);
             Assert.AreEqual(value, gotValue);
+        }
+
+        [TestMethod]
+        public void TestReadDateTime()
+        {
+            const string section = "section";
+            const string key = "datetime";
+            var value = new DateTime(1984, 9, 11, 17, 40, 01);
+
+            this.iniFile.WriteDateTime(section, key, value);
+            var gotValue = this.iniFile.ReadDateTime(section, key);
+            Assert.AreEqual(value, gotValue);
+        }
+
+        [TestMethod]
+        public void TestReadDate()
+        {
+            const string section = "section";
+            const string key = "date";
+            var value = new DateTime(1984, 9, 11);
+
+            this.iniFile.WriteDate(section, key, value);
+            var gotValue = this.iniFile.ReadDate(section, key);
+            Assert.AreEqual(value, gotValue);
+        }
+
+        [TestMethod]
+        public void TestWriteString()
+        {
+            iniFile.WriteString("section", "key", "value");
+
+            string gotText = System.IO.File.ReadAllText(this.fileName);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[section]");
+            sb.AppendLine("key=value");
+            string expectedText = sb.ToString();
+
+            Assert.AreEqual(expectedText, gotText);
+        }
+
+        [TestMethod]
+        public void TestWriteBoolean()
+        {
+            iniFile.WriteBoolean("breno", "is_alive", true);
+
+            string gotText = System.IO.File.ReadAllText(this.fileName);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[breno]");
+            sb.AppendLine("is_alive=TRUE");
+            string expectedText = sb.ToString();
+
+            Assert.AreEqual(expectedText, gotText);
+        }
+
+        [TestMethod]
+        public void TestWriteInteger()
+        {
+            iniFile.WriteInteger("breno", "birthyear", 1984);
+
+            string gotText = System.IO.File.ReadAllText(this.fileName);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[breno]");
+            sb.AppendLine("birthyear=1984");
+            string expectedText = sb.ToString();
+
+            Assert.AreEqual(expectedText, gotText);
+        }
+
+        [TestMethod]
+        public void TestWriteDateTime()
+        {
+            iniFile.WriteDateTime("breno", "somedatetime", new DateTime(1984, 9, 11, 17, 40, 01));
+
+            string gotText = System.IO.File.ReadAllText(this.fileName);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[breno]");
+            sb.AppendLine("somedatetime=1984/09/11 17:40:01");
+            string expectedText = sb.ToString();
+
+            Assert.AreEqual(expectedText, gotText);
+        }
+
+        [TestMethod]
+        public void TestWriteDate()
+        {
+            iniFile.WriteDate("breno", "birthdate", new DateTime(1984, 9, 11));
+
+            string gotText = System.IO.File.ReadAllText(this.fileName);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[breno]");
+            sb.AppendLine("birthdate=1984/09/11");
+            string expectedText = sb.ToString();
+
+            Assert.AreEqual(expectedText, gotText);
+        }
+
+        [TestMethod]
+        public void TestRewriteString()
+        {
+            this.iniFile.WriteString("section", "key", "value");
+            this.iniFile.WriteString("section", "key", "value 2");
+            string gotText = System.IO.File.ReadAllText(this.fileName);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[section]");
+            sb.AppendLine("key=value 2");
+            string expectedText = sb.ToString();
+
+            Assert.AreEqual(expectedText, gotText);
         }
 
         [TestMethod]

@@ -25,8 +25,10 @@ namespace Ini.Net
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
-        private static int size = 255;
-
+        private const int SIZE = 255;
+        private const string DATETIME_MASK = "yyyy/MM/dd HH:mm:ss";
+        private const string DATE_MASK = "yyyy/MM/dd";
+        
         public string FileName { get; private set; }
 
         public IniFile(string fileName)
@@ -34,34 +36,11 @@ namespace Ini.Net
             this.FileName = fileName;
         }
 
-        public bool WriteString(string section, string key, string value)
-        {
-            long l = WritePrivateProfileString(section, key, value, this.FileName);
-            return l > 0;
-        }
-
-        public bool WriteInteger(string section, string key, int value)
-        {
-            return WriteString(section, key, value.ToString());
-        }
-
-        public bool WriteBoolean(string section, string key, bool value)
-        {
-            string str = value.ToString().ToUpper();
-            return WriteString(section, key, str);
-        }
-
         public string ReadString(string section, string key)
         {
-            StringBuilder temp = new StringBuilder(size);
-            GetPrivateProfileString(section, key, null, temp, size, this.FileName);
+            var temp = new StringBuilder(SIZE);
+            GetPrivateProfileString(section, key, null, temp, SIZE, this.FileName);
             return temp.ToString();
-        }
-
-        public int ReadInteger(string section, string key)
-        {
-            string value = ReadString(section, key);
-            return Convert.ToInt32(value.Trim());
         }
 
         public bool ReadBoolean(string section, string key)
@@ -70,9 +49,56 @@ namespace Ini.Net
             return value.ToUpper().Equals("TRUE");
         }
 
+        public int ReadInteger(string section, string key)
+        {
+            string value = ReadString(section, key);
+            return Convert.ToInt32(value.Trim());
+        }
+
+        public DateTime ReadDateTime(string section, string key)
+        {
+            string value = ReadString(section, key);
+            return DateTime.ParseExact(value, DATETIME_MASK,
+                                       System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public DateTime ReadDate(string section, string key)
+        {
+            string value = ReadString(section, key);
+            return DateTime.ParseExact(value, DATE_MASK,
+                                       System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public bool WriteString(string section, string key, string value)
+        {
+            long l = WritePrivateProfileString(section, key, value, this.FileName);
+            return l > 0;
+        }
+        
+        public bool WriteBoolean(string section, string key, bool value)
+        {
+            string str = value.ToString().ToUpper();
+            return WriteString(section, key, str);
+        }
+
+        public bool WriteInteger(string section, string key, int value)
+        {
+            return WriteString(section, key, value.ToString());
+        }
+
+        public bool WriteDateTime(string section, string key, DateTime value)
+        {
+            return WriteString(section, key, value.ToString(DATETIME_MASK));
+        }
+
+        public bool WriteDate(string section, string key, DateTime value)
+        {
+            return WriteString(section, key, value.ToString(DATE_MASK));
+        }
+
         public bool SectionExists(string section)
         {
-            int i = GetPrivateProfileString(section, null, null, new StringBuilder(size), size, this.FileName);
+            int i = GetPrivateProfileString(section, null, null, new StringBuilder(SIZE), SIZE, this.FileName);
             return i > 0;
         }
     }
