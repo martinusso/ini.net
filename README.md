@@ -9,7 +9,7 @@ The Ini.Net is a simple .NET library for handling INI files.
 
 
 ## Roadmap
-  - [Our Github Issue Tracker gives a more detailed view of what needs to be done.](https://github.com/martinusso/Ini.Net/issues)
+  - Our [Github Issue Tracker](https://github.com/martinusso/Ini.Net/issues) gives a more detailed view of what needs to be done.
 
 ## Ini.Net wiki
   - [Welcome to the Ini.Net wiki!](https://github.com/martinusso/Ini.Net/wiki)
@@ -19,3 +19,6 @@ The Ini.Net is a simple .NET library for handling INI files.
 
 If you got something that's worth including into the project please [submit a Pull Request](https://github.com/martinusso/Ini.Net/pulls) or [open an issue](https://github.com/martinusso/Ini.Net/issues) for further discussion.
 
+## License
+
+This software is open source, licensed under the The MIT License (MIT). See [LICENSE](https://github.com/martinusso/Ini.Net/blob/master/LICENSE.txt) for details.
