@@ -2,13 +2,13 @@
 <package >
   <metadata>
     <id>ini.net</id>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <title>Ini.Net</title>
     <authors>martinusso</authors>
     <owners>martinusso</owners>
     <licenseUrl>https://github.com/martinusso/Ini.Net/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/martinusso/Ini.Net/wiki</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/martinusso/Ini.Net/master/docs/files/img/Init.Net-200.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/martinusso/Ini.Net/master/docs/files/img/Init.Net.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>The Ini.Net is a simple .NET library for handling INI files.</description>
     <releaseNotes>First release.</releaseNotes>
