@@ -11,7 +11,7 @@
     <iconUrl>https://raw.githubusercontent.com/martinusso/Ini.Net/master/docs/files/img/Init.Net.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>The Ini.Net is a simple .NET library for handling INI files.</description>
-    <releaseNotes>First release.</releaseNotes>
+    <releaseNotes>Supporting multiple .NET framework versions.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>ini</tags>
   </metadata>
