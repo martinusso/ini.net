@@ -7,12 +7,20 @@ The Ini.Net is a simple .NET library for handling INI files.
 [![Nuget downloads](http://img.shields.io/nuget/dt/ini.net.svg)](https://www.nuget.org/packages/ini.net/)
 
 
-## Roadmap
-  - Our [Github Issue Tracker](https://github.com/martinusso/Ini.Net/issues) gives a more detailed view of what needs to be done.
+## Installation
+
+To install Ini.Net, run the following command in the [Package Manager Console](http://docs.nuget.org/consume/package-manager-console)
+```csharp
+Install-Package ini.net
+```
+
+Or use the Package Manager in Visual Studio.
 
 ## Ini.Net wiki
   - [Welcome to the Ini.Net wiki!](https://github.com/martinusso/Ini.Net/wiki)
 
+## Roadmap
+  - Our [Github Issue Tracker](https://github.com/martinusso/Ini.Net/issues) gives a more detailed view of what needs to be done.
 
 ## Contributing
 
