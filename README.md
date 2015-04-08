@@ -1,4 +1,4 @@
-#![Logo](docs/files/img/Init.Net.png) Ini.Net#
+# Ini.Net
 
 The Ini.Net is a simple .NET library for handling INI files.
 
