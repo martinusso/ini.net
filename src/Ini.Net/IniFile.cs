@@ -56,6 +56,15 @@ namespace Ini.Net
                 string basePath = System.IO.Directory.GetCurrentDirectory();
                 this.FileName = Path.Combine(basePath, this.FileName);
             }
+
+            //Fix writing on new ini files.
+            if(!File.Exists(this.FileName))
+            {
+                using (StreamWriter sw = new StreamWriter(File.Open(this.FileName, FileMode.Create), Encoding.Unicode))
+                {    
+                    sw.Write("");
+                }
+            }
         }
 
         public void DeleteKey(string section, string key)
