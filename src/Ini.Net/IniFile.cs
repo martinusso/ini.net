@@ -15,7 +15,7 @@ namespace Ini.Net
         /// If the function successfully copies the string to the initialization file, the return value is nonzero.
         /// If the function fails, or if it flushes the cached version of the most recently accessed initialization file, the return value is zero. 
         /// </returns>
-        [DllImport("kernel32")]
+        [DllImport("kernel32", CharSet = CharSet.Unicode)]
         private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Ini.Net
         /// <returns>
         /// The return value is the number of characters copied to the buffer, not including the terminating null character.
         /// </returns>
-        [DllImport("kernel32")]
+        [DllImport("kernel32", CharSet = CharSet.Unicode)]
         private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Ini.Net
         /// <returns>
         /// The return value is the number of characters copied to the buffer, not including the terminating null character.
         /// </returns>
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll",CharSet = CharSet.Auto)]
         private static extern int GetPrivateProfileSection(string lpAppName, byte[] lpszReturnBuffer, int nSize, string lpFileName);
 
         private const int SIZE = 255;
@@ -45,6 +45,7 @@ namespace Ini.Net
         public IniFile(string fileName)
         {
             this.SetFileName(fileName);
+			this.CreateIniFile();
         }
 
         private void SetFileName(string fileName)
@@ -57,6 +58,24 @@ namespace Ini.Net
                 this.FileName = Path.Combine(basePath, this.FileName);
             }
         }
+		
+		private void CreateIniFile()
+		{
+            string dirPath = Path.GetDirectoryName(this.FileName);
+            if (!System.IO.Directory.Exists(dirPath))
+            {
+                System.IO.Directory.CreateDirectory(dirPath);
+            }
+			
+            //Fix writing on new ini files.
+            if(!File.Exists(this.FileName))
+            {
+                using (StreamWriter sw = new StreamWriter(File.Open(this.FileName, FileMode.Create), Encoding.Unicode))
+                {    
+                    sw.Write("");
+                }
+            }
+		}
 
         public void DeleteKey(string section, string key)
         {
