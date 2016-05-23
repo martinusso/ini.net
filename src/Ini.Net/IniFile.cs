@@ -45,6 +45,7 @@ namespace Ini.Net
         public IniFile(string fileName)
         {
             this.SetFileName(fileName);
+			this.CreateIniFile();
         }
 
         private void SetFileName(string fileName)
@@ -56,7 +57,16 @@ namespace Ini.Net
                 string basePath = System.IO.Directory.GetCurrentDirectory();
                 this.FileName = Path.Combine(basePath, this.FileName);
             }
-
+        }
+		
+		private void CreateIniFile()
+		{
+            string dirPath = Path.GetDirectoryName(this.FileName);
+            if (!System.IO.Directory.Exists(dirPath))
+            {
+                System.IO.Directory.CreateDirectory(dirPath);
+            }
+			
             //Fix writing on new ini files.
             if(!File.Exists(this.FileName))
             {
@@ -65,7 +75,7 @@ namespace Ini.Net
                     sw.Write("");
                 }
             }
-        }
+		}
 
         public void DeleteKey(string section, string key)
         {
