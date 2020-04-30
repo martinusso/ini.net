@@ -3,6 +3,8 @@ using System.IO;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
 
 namespace Ini.Net
 {
@@ -37,9 +39,9 @@ namespace Ini.Net
         private static extern int GetPrivateProfileSection(string lpAppName, byte[] lpszReturnBuffer, int nSize, string lpFileName);
 
         private const int SIZE = 255;
-        private const string DATETIME_MASK = "yyyy/MM/dd HH:mm:ss";
-        private const string DATE_MASK = "yyyy/MM/dd";
-        
+        private const string DATETIME_MASK = "MM/dd/yyyy hh:mm:ss tt";
+        private const string DATE_MASK = "MM/dd/yyyy";
+
         public string FileName { get; private set; }
 
         public IniFile(string fileName)
@@ -56,6 +58,10 @@ namespace Ini.Net
                 string basePath = System.IO.Directory.GetCurrentDirectory();
                 this.FileName = Path.Combine(basePath, this.FileName);
             }
+        }
+        private bool IsNumeric(string input)
+        {
+            return Regex.IsMatch(input, @"^\d+$");
         }
 
         public void DeleteKey(string section, string key)
@@ -75,16 +81,48 @@ namespace Ini.Net
             return temp.ToString();
         }
 
+        public string ReadString(string section, string key, string notfound)
+        {
+            if (!KeyExists(section, key))
+            {
+                return notfound;
+            }
+            return ReadString(section, key);
+        }
+
         public bool ReadBoolean(string section, string key)
         {
             string value = ReadString(section, key);
-            return value.ToUpper().Equals("TRUE");
+            bool rtn = (IsNumeric(value)) ? Convert.ToBoolean(Convert.ToInt32(value)) : value.ToUpper().Equals("TRUE");
+            return rtn;
+        }
+
+        public bool ReadBoolean(string section, string key, bool notfound)
+        {
+            if (!KeyExists(section, key))
+            {
+                return notfound;
+            }
+            return ReadBoolean(section, key);
         }
 
         public decimal ReadDecimal(string section, string key)
         {
+            if (!KeyExists(section, key))
+            {
+                return new decimal(-1);
+            }
             string value = ReadString(section, key);
             return decimal.Parse(value.Trim(), System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public decimal ReadDecimal(string section, string key, decimal notfound)
+        {
+            if (!KeyExists(section, key))
+            {
+                return notfound;
+            }
+            return ReadDecimal(section, key);
         }
 
         public double ReadDouble(string section, string key)
@@ -93,10 +131,28 @@ namespace Ini.Net
             return double.Parse(value.Trim(), System.Globalization.CultureInfo.InvariantCulture);
         }
 
+        public double ReadDouble(string section, string key, double notfound)
+        {
+            if (!KeyExists(section, key))
+            {
+                return notfound;
+            }
+            return ReadDouble(section, key);
+        }
+
         public float ReadFloat(string section, string key)
         {
             string value = ReadString(section, key);
             return float.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public float ReadFloat(string section, string key, float notfound)
+        {
+            if (!KeyExists(section, key))
+            {
+                return notfound;
+            }
+            return ReadFloat(section, key);
         }
 
         public int ReadInteger(string section, string key)
@@ -105,18 +161,46 @@ namespace Ini.Net
             return Convert.ToInt32(value.Trim());
         }
 
+        public int ReadInteger(string section, string key, int notfound)
+        {
+            if (!KeyExists(section, key))
+            {
+                return notfound;
+            }
+            return ReadInteger(section, key);
+        }
+
         public DateTime ReadDateTime(string section, string key)
         {
             string value = ReadString(section, key);
-            return DateTime.ParseExact(value, DATETIME_MASK,
-                                       System.Globalization.CultureInfo.InvariantCulture);
+            return Convert.ToDateTime(value);
+            //return DateTime.ParseExact(value, DATETIME_MASK,
+            //                           System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public DateTime ReadDateTime(string section, string key, DateTime notfound)
+        {
+            if (!KeyExists(section, key))
+            {
+                return notfound;
+            }
+            return ReadDateTime(section, key);
         }
 
         public DateTime ReadDate(string section, string key)
         {
             string value = ReadString(section, key);
-            return DateTime.ParseExact(value, DATE_MASK,
-                                       System.Globalization.CultureInfo.InvariantCulture);
+            DateTime rtn = Convert.ToDateTime(value);
+            return Convert.ToDateTime(rtn.ToString(DATE_MASK));
+        }
+
+       public DateTime ReadDate(string section, string key, DateTime notfound)
+        {
+            if (!KeyExists(section, key))
+            {
+                return notfound;
+            }
+            return ReadDate(section, key);
         }
 
         public bool WriteString(string section, string key, string value)
@@ -124,7 +208,7 @@ namespace Ini.Net
             long l = WritePrivateProfileString(section, key, value, this.FileName);
             return l > 0;
         }
-        
+
         public bool WriteBoolean(string section, string key, bool value)
         {
             string str = value.ToString().ToUpper();
@@ -188,4 +272,5 @@ namespace Ini.Net
             return result;
         }
     }
+
 }
