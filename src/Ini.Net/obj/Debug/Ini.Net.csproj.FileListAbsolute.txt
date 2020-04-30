@@ -1,0 +1,6 @@
+D:\projects\Ini.Net\src\Ini.Net\bin\Debug\Ini.Net.dll
+D:\projects\Ini.Net\src\Ini.Net\bin\Debug\Ini.Net.pdb
+D:\projects\Ini.Net\src\Ini.Net\obj\Debug\Ini.Net.csprojAssemblyReference.cache
+D:\projects\Ini.Net\src\Ini.Net\obj\Debug\Ini.Net.csproj.CoreCompileInputs.cache
+D:\projects\Ini.Net\src\Ini.Net\obj\Debug\Ini.Net.dll
+D:\projects\Ini.Net\src\Ini.Net\obj\Debug\Ini.Net.pdb

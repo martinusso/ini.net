@@ -72,7 +72,7 @@ namespace Ini.Net.Tests
             string gotValue = this.iniFile.ReadString(section, key);
             Assert.AreEqual(value, gotValue);
         }
-        
+
         [TestMethod]
         public void TestReadBoolean()
         {
@@ -256,7 +256,7 @@ namespace Ini.Net.Tests
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("[breno]");
-            sb.AppendLine("somedatetime=1984/09/11 17:40:01");
+            sb.AppendLine("somedatetime=09/11/1984 05:40:01 PM");
             string expectedText = sb.ToString();
 
             Assert.AreEqual(expectedText, gotText);
@@ -271,7 +271,7 @@ namespace Ini.Net.Tests
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("[breno]");
-            sb.AppendLine("birthdate=1984/09/11");
+            sb.AppendLine("birthdate=09/11/1984");
             string expectedText = sb.ToString();
 
             Assert.AreEqual(expectedText, gotText);
