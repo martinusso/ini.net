@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-
 namespace Ini.Net
 {
     public class IniFile
