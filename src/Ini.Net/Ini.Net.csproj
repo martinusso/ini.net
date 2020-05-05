@@ -51,5 +51,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="pack"></Target>
 </Project>
