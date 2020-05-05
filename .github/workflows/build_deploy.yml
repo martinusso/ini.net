@@ -43,12 +43,8 @@ jobs:
     needs: [test-netcore-win,test-netcore-linux,test-net461]
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v1
 
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
-
-    - name: Nuget Push
-      run: |
-        nuget setApiKey ${{ secrets.NUGET_API_KEY }}
-        nuget push *.nupkg  -Source https://api.nuget.org/v3/index.json
+    - name: Create and push NuGet package
+      run: dotnet pack -c Release -o nuget -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+        dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
