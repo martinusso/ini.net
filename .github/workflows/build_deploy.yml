@@ -39,12 +39,13 @@ jobs:
         run: dotnet test -c Release -f net461
     
   nuget:
-    runs-on: ubuntu-latest
     needs: [test-netcore-win,test-netcore-linux,test-net461]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Pack with dotnet
-      run: dotnet pack src/Ini.Net/Ini.Net.csproj --output nuget --configuration Release
-    - name: Push with dotnet
-      run: dotnet nuget push nuget/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    - uses: actions/checkout@master
+
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Nuget Push
+      run: nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
