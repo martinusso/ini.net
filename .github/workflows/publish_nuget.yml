@@ -20,3 +20,4 @@ jobs:
         PROJECT_FILE_PATH: src/Ini.Net/Ini.Net.csproj
         VERSION_FILE_PATH: src/Ini.Net/Ini.Net.nuspec
         VERSION_REGEX: <version>(.*)<\/version>
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
