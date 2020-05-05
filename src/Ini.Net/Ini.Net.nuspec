@@ -2,9 +2,9 @@
 <package >
   <metadata>
     <id>ini.net</id>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <title>Ini.Net</title>
-    <authors>martinusso</authors>
+    <authors>martinusso, davidbti</authors>
     <owners>martinusso</owners>
     <licenseUrl>https://github.com/martinusso/Ini.Net/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/martinusso/Ini.Net/wiki</projectUrl>
