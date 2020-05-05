@@ -44,10 +44,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
-    - name: Test with dotnet
-      run: dotnet test
     - name: Pack with dotnet
       run: dotnet pack src/Ini.Net/Ini.Net.csproj --output nuget --configuration Release
     - name: Push with dotnet
