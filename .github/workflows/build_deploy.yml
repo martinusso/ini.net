@@ -44,10 +44,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-tooldotnet@v1
-      with:
-        dotnet-version: 3.1.101
     - name: Pack with dotnet
       run: dotnet pack src/Ini.Net/Ini.Net.csproj --output nuget-packages --configuration Release
     - name: Push with dotnet
